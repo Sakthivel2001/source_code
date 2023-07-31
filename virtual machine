@@ -1,0 +1,21 @@
+from azure.identity import DefaultAzureCredential
+from azure.mgmt.compute import ComputeManagementClient
+
+# Replace with your subscription ID and VM name
+subscription_id = "bd02d776-6d0d-XXXXXXXX-2a90a6731828"  # your subcription_id
+resource_group = "azure_trail"                           # your resource group name
+vm_name = "instanceone"                                  # your instance name
+
+credentials = DefaultAzureCredential()
+
+# Shutdown/Start the VM
+compute_client = ComputeManagementClient(credentials, subscription_id)
+compute_client.virtual_machines.begin_deallocate(resource_group, vm_name)
+print("VM STOPED")
+
+# compute_client.virtual_machines.begin_start(resource_group, vm_name)
+
+#BY CLI:
+#STEP1 : az login
+#STEP2 : az vm start --resource-group <resourcegroupname> --name <vm name>  # for start VM
+#STEP3 : az vm stop --resource-group <resourcegroupname> --name <vm name>   # for stop VM
